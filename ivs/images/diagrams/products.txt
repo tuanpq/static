@@ -1,0 +1,22 @@
+@startuml
+
+interface	ProductsViewToPresenterProtocol
+interface	ProductsInteractorToPresenterProtocol
+interface	ProductsPresenterToRouterProtocol
+interface	ProductsPresenterToViewProtocol
+interface	ProductsPresenterToInteractorProtocol
+class		ProductsViewController implements ProductsPresenterToViewProtocol
+class		ProductsInteractor implements ProductsPresenterToInteractorProtocol
+class		ProductsPresenter implements ProductsViewToPresenterProtocol, ProductsInteractorToPresenterProtocol
+class		ProductsRouter implements ProductsPresenterToRouterProtocol
+
+ProductsViewController				o--	ProductsViewToPresenterProtocol
+ProductsInteractor				o--	ProductsInteractorToPresenterProtocol
+ProductsPresenter				o--	ProductsPresenterToViewProtocol
+ProductsPresenter				o--	ProductsPresenterToInteractorProtocol
+ProductsPresenter				o--	ProductsPresenterToRouterProtocol
+ProductsRouter					--	ProductsViewController : use >
+ProductsRouter					--	ProductsPresenter : use >
+ProductsRouter					--	ProductsInteractor : use >
+
+@enduml
