@@ -1,0 +1,29 @@
+@startuml
+
+interface	ProductDetailViewToPresenterProtocol
+interface	ProductDetailPresenterToViewProtocol
+interface	ProductDetailPresenterToInteractorProtocol
+interface	ProductDetailInteractorToPresenterProtocol
+interface	ProductDetailPresenterToRouterProtocol
+interface	ProductDetailPresenterToImagePageViewProtocol
+class		ProductDetailViewController implements ProductDetailPresenterToViewProtocol
+class		ProductDetailImagesPageViewController implements ProductDetailPresenterToImagePageViewProtocol
+class		ProductDetailImageViewController
+class		ProductDetailInteractor implements ProductDetailPresenterToInteractorProtocol	
+class		ProductDetailPresenter implements ProductDetailViewToPresenterProtocol, ProductDetailInteractorToPresenterProtocol
+class		ProductDetailRouter implements ProductDetailPresenterToRouterProtocol
+
+ProductDetailViewController			o--	ProductDetailViewToPresenterProtocol
+ProductDetailImagesPageViewController		o--	ProductDetailViewToPresenterProtocol
+ProductDetailViewController			*--	ProductDetailImagesPageViewController
+ProductDetailViewController			*--	ProductDetailImageViewController
+ProductDetailInteractor				o--	ProductDetailInteractorToPresenterProtocol
+ProductDetailPresenter				o--	ProductDetailPresenterToViewProtocol
+ProductDetailPresenter				o--	ProductDetailPresenterToImagePageViewProtocol
+ProductDetailPresenter				o--	ProductDetailPresenterToInteractorProtocol
+ProductDetailPresenter				o--	ProductDetailPresenterToRouterProtocol
+ProductDetailRouter				--	ProductDetailViewController : use >
+ProductDetailRouter				--	ProductDetailPresenter : use >
+ProductDetailRouter				--	ProductDetailInteractor : use >
+
+@enduml
